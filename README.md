@@ -1,30 +1,28 @@
 # Northstar Learning Library
 
-Northstar Learning Library is a multi-week capstone project by **Blen Hadgu**. It uses **Archetype C: The Curation & Discovery Portal** to create a web application for finding, filtering, comparing, and saving accessible technology-learning resources.
+Northstar Learning Library is a multi-week capstone project by **Blen Hadgu**. It uses **Archetype C: The Curation & Discovery Portal** to create a future web application for finding, filtering, comparing, and saving accessible technology-learning resources.
 
-## Week 02 Milestone
+## Live Milestones
 
-The Week 02 deliverable is a visual **Design System Token Page** containing:
+- Project landing page: `https://blen-hadgu-web.github.io/northstar-learning-library/`
+- Week 02 design tokens: `https://blen-hadgu-web.github.io/northstar-learning-library/week02/`
+- Week 03 structural frame: `https://blen-hadgu-web.github.io/northstar-learning-library/week03/`
 
-- Light and dark color tokens written with `oklch()`
-- Background and text pairs that exceed WCAG AA contrast requirements
-- Fluid typography variables created with `clamp()`
-- Relative spacing constants written in `rem`
-- A visual token reference page
-- The required fluid-type calculation
-- The required AI prompts and design decisions
-- Manual verification notes for zoom, contrast, responsiveness, and milestone preservation
+## Public Repository
+
+`https://github.com/blen-hadgu-web/northstar-learning-library`
 
 ## Selected Archetype
 
 **Archetype C: The Curation & Discovery Portal**
 
-Planned structural elements:
+The planned application includes:
 
-- Top search header
-- Filter sidebar
-- Responsive resource-card grid
-- Resource comparison widgets
+- A persistent search and navigation header
+- A filter sidebar
+- A responsive catalog area
+- Resource-card grids
+- Comparison and saved-resource tools
 
 ## Project Structure
 
@@ -32,142 +30,194 @@ Planned structural elements:
 northstar-learning-library/
 ├── index.html
 ├── README.md
-└── week02/
+├── SUBMISSION.txt
+├── SUBMISSION-WEEK03.txt
+├── week02/
+│   ├── index.html
+│   └── styles.css
+└── week03/
     ├── index.html
-    └── styles.css
+    ├── styles.css
+    ├── TESTING-CHECKLIST.md
+    └── VIDEO-SCRIPT.md
 ```
 
-The root `index.html` is the global milestone landing page. It links directly to `week02/index.html`. Future milestones will be preserved in directories such as `week03/`, `week04/`, and so on.
+Each milestone remains in its own directory. Week 03 was added without changing either Week 02 file.
 
 ## Run Locally
 
-No package manager, framework, build process, or JavaScript is required.
-
-### Open directly
+No package manager, framework, JavaScript, or build process is required.
 
 1. Download or clone the repository.
-2. Open the project folder.
-3. Double-click `index.html`.
+2. Open the root `index.html` in a browser.
+3. Use the milestone links to open Week 02 or Week 03.
 
-### Use VS Code Live Server
+VS Code Live Server may also be used.
 
-1. Open the repository folder in Visual Studio Code.
-2. Install Live Server if needed.
-3. Right-click the root `index.html`.
-4. Choose **Open with Live Server**.
+# Week 02: Global Token Blueprint
+
+Week 02 established:
+
+- Light and dark OKLCH color variables
+- WCAG AA background/text pairs
+- Fluid typography using `clamp()`
+- Relative spacing variables
+- Cascade layers
+- Manual zoom and responsiveness checks
+
+Important shared variables include:
+
+```css
+--color-primary
+--color-secondary
+--color-background
+--color-surface
+--color-text
+--color-border
+--color-focus
+
+--space-xs
+--space-sm
+--space-md
+--space-lg
+--space-xl
+```
+
+# Week 03: Structural Frames & Semantic Navigation
+
+Week 03 adds the physical application skeleton while preserving Week 02.
+
+## Semantic structure
+
+The Week 03 page uses:
+
+- `<header>` for the global brand and control banner
+- `<nav>` for primary, utility, catalog, and secondary navigation
+- `<aside>` for the filter rail
+- `<main>` for the catalog workspace
+- `<footer>` for milestone status and secondary links
+- `<section>`, `<ol>`, and `<article>` for the reserved catalog structure
+
+The Week 03 HTML contains no `<div>` elements.
+
+## Structural grid
+
+Desktop layout:
+
+```css
+.portal-shell {
+  display: grid;
+  grid-template:
+    "header header" auto
+    "filters catalog" minmax(0, 1fr)
+    "footer footer" auto
+    / minmax(14rem, 18rem) minmax(0, 1fr);
+  block-size: 100dvh;
+}
+```
+
+The filter rail receives a usable width range. The catalog uses `minmax(0, 1fr)` so it may shrink below its min-content size instead of producing horizontal overflow.
+
+At viewports below 52rem, the frame becomes a single column:
+
+```css
+.portal-shell {
+  grid-template:
+    "header" auto
+    "filters" auto
+    "catalog" minmax(0, 1fr)
+    "footer" auto
+    / minmax(0, 1fr);
+}
+```
+
+## Why the sidebar previously could collapse or overflow
+
+In Grid, an `auto` minimum or a track based only on flexible fractions may interact with an item's min-content size. A long child may prevent the main track from shrinking, while a loosely defined sidebar may become too narrow or push the grid wider than the viewport.
+
+The audited correction is:
+
+```css
+grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+```
+
+- `minmax(14rem, 18rem)` protects the filter rail from collapsing on desktop.
+- `minmax(0, 1fr)` explicitly allows the catalog track to shrink.
+- A narrow-screen layout stacks the rail and catalog before the two-column minimum becomes unsafe.
+- Child elements use `min-inline-size: 0` where necessary.
+
+## Token integration
+
+Week 03 copied the Week 02 stylesheet into `/week03/styles.css` and added a separate `week03-frame` layer. Structural components use the existing variables:
+
+```css
+padding: var(--space-md);
+gap: var(--space-md);
+background: var(--color-surface);
+color: var(--color-text);
+border-color: var(--color-border);
+outline-color: var(--color-focus);
+```
+
+## AI Tool and Prompts
+
+**AI tool:** ChatGPT
+
+### Prompt 1: Drafting semantic layout scaffolding
+
+> I am building an Archetype C Curation & Discovery Portal for my Northstar Learning Library capstone project. Write the semantic HTML5 layout wrapper utilizing `<header>`, `<nav>`, `<main>`, `<aside>`, and `<footer>`. Then write the CSS Grid rules needed to position these zones so the layout occupies exactly 100% of the dynamic viewport height. Use low-specificity CSS class selectors and bind padding, gaps, borders, focus indicators, surfaces, and background colors to my existing Week 02 CSS variables. Keep the page focused on structural zones; do not add final catalog content or lorem ipsum.
+
+### Prompt 2: Grid frame debugging
+
+> My aside element is collapsing to zero width when the screen gets narrow, and it is causing a horizontal scrollbar. Can you explain why this is happening within the CSS Grid formatting context and how I can set a responsive minimum width constraint on my sidebar using `minmax()`?
+>
+> The draft uses a left filter `<aside>` and a flexible catalog `<main>`. Correct the grid with a bounded sidebar track, a shrinkable main track using `minmax(0, 1fr)`, `min-inline-size: 0` where required, and a narrow-screen stacking strategy.
+
+## Human Audit
+
+### No div-soup
+
+- The outer structure is entirely semantic.
+- There are no `<div>` elements in `week03/index.html`.
+- Reserved catalog positions use list items and articles with visually hidden headings.
+
+### Keyboard focus
+
+- The skip link is first.
+- Navigation links follow in a logical source order.
+- Filter controls follow navigation.
+- High-contrast focus rings reuse `--color-focus`.
+
+### Viewport resiliency
+
+The frame is intended to be tested at:
+
+- 320px
+- 375px
+- 768px
+- 1024px
+- 1440px
+- 2560px
+
+The sidebar and catalog stack before their desktop minimums can cause overflow. Catalog slots use an auto-fitting grid with bounded minimums.
+
+## Testing and Video
+
+- Week 03 checklist: [`week03/TESTING-CHECKLIST.md`](week03/TESTING-CHECKLIST.md)
+- Week 03 video script: [`week03/VIDEO-SCRIPT.md`](week03/VIDEO-SCRIPT.md)
+
+The separate “Web Project Testing & Quality Assurance Guide” was not included in the supplied assignment text. The included checklist covers all visible requirements and common semantic, keyboard, responsive, and production tests.
 
 ## Deployment
 
-Public repository:
+GitHub Pages should deploy from:
 
 ```text
-https://github.com/blen-hadgu-web/northstar-learning-library
+Branch: main
+Folder: /(root)
 ```
 
-Expected GitHub Pages URLs:
-
-- Landing page: `https://blen-hadgu-web.github.io/northstar-learning-library/`
-- Week 02: `https://blen-hadgu-web.github.io/northstar-learning-library/week02/`
-
-Configure GitHub Pages to deploy from the `main` branch and `/(root)`.
-
-## Design Tokens
-
-### Light Mode
-
-```css
---color-primary: oklch(48% 0.19 255);
---color-secondary: oklch(45% 0.13 170);
---color-background: oklch(97.5% 0.015 250);
---color-text: oklch(23% 0.035 255);
-```
-
-The background/text pair has an approximate contrast ratio of **15.71:1**.
-
-### Dark Mode
-
-```css
---color-primary: oklch(72% 0.15 250);
---color-secondary: oklch(76% 0.12 170);
---color-background: oklch(17% 0.025 255);
---color-text: oklch(94% 0.015 250);
-```
-
-The background/text pair has an approximate contrast ratio of **16.06:1**.
-
-Both exceed the WCAG AA minimum of 4.5:1 for normal text.
-
-## Lightness Decisions
-
-- Light mode: background `L = 97.5%`, text `L = 23%`
-- Dark mode: background `L = 17%`, text `L = 94%`
-
-The large separation in OKLCH lightness creates strong visual contrast. Because lightness separation alone does not mathematically guarantee a WCAG ratio, the final pairs were also checked with contrast calculations.
-
-## Fluid Typography
-
-```css
---size-base: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
---size-heading-md: clamp(1.25rem, 1.05rem + 0.85vw, 1.75rem);
---size-heading-lg: clamp(1.75rem, 1.31rem + 1.878vw, 3rem);
-```
-
-### Main-title calculation
-
-The required range is 28px at 375px and 48px at 1440px.
-
-```text
-slope = (48 - 28) / (1440 - 375)
-      = 20 / 1065
-      ≈ 0.01878
-
-vw coefficient = 0.01878 × 100
-               ≈ 1.878vw
-
-intercept = 28 - (0.01878 × 375)
-          ≈ 20.96px
-          ≈ 1.31rem
-```
-
-Final property:
-
-```css
---size-heading-lg: clamp(1.75rem, 1.31rem + 1.878vw, 3rem);
-```
-
-The middle value combines `rem` and `vw`, so browser zoom still enlarges the text.
-
-## Spacing Scale
-
-```css
---space-xs: 0.25rem;
---space-sm: 0.5rem;
---space-md: 1rem;
---space-lg: 2rem;
---space-xl: 4rem;
-```
-
-## AI Assistance
-
-AI was used as a co-pilot to draft token ideas and explain the fluid-sizing calculation. The final values were reviewed and implemented by the project author.
-
-### Palette prompt
-
-> I am building a curation and discovery portal for accessible technology learning in OKLCH color space. I want a dark/light mode setup. Can you output a CSS :root block with color variables utilizing oklch()? The background and text colors must pass WCAG AA contrast guidelines. Please explain the math behind the Lightness (L) levels you chose for both light and dark mode to guarantee contrast.
-
-### Fluid-scale prompt
-
-> I need a CSS custom property for a main title font size that scales fluidly. It should have a minimum size of 1.75rem at 375px viewport width, and a maximum size of 3rem at 1440px viewport width. Can you write the clamp() property using a mix of rem and vw, and break down exactly how the middle viewport-width expression is calculated?
-
-## Manual Verification
-
-- Tested at 200% browser zoom
-- Confirmed typography grows because the fluid expressions contain `rem`
-- Confirmed the root page links directly to `week02/`
-- Confirmed the layout adapts to mobile and desktop widths
-- Confirmed keyboard focus indicators are visible
-- Confirmed both background/text pairs exceed 4.5:1
-- Confirmed future milestones can be added without overwriting Week 02
+Opening the live Week 03 link in an Incognito/Private window verifies that the public deployment is accessible.
 
 ## Author
 
