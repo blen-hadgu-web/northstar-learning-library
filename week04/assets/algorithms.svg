@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title">
+  <title id="title">Data structures and algorithms</title>
+  <rect width="640" height="420" fill="oklch(92% 0.045 285)"/>
+  <g stroke="oklch(48% 0.19 255)" stroke-width="10" stroke-linecap="round">
+    <path d="M120 125h95M255 125h95M390 125h95"/>
+    <path d="M160 170v80M320 170v80M480 170v80"/>
+  </g>
+  <g fill="oklch(76% 0.12 170)" stroke="oklch(23% 0.035 255)" stroke-width="6">
+    <circle cx="90" cy="125" r="35"/>
+    <circle cx="230" cy="125" r="35"/>
+    <circle cx="370" cy="125" r="35"/>
+    <circle cx="510" cy="125" r="35"/>
+  </g>
+  <rect x="95" y="260" width="130" height="70" rx="18" fill="oklch(48% 0.19 255)"/>
+  <rect x="255" y="260" width="130" height="70" rx="18" fill="oklch(72% 0.1 300)"/>
+  <rect x="415" y="260" width="130" height="70" rx="18" fill="oklch(82% 0.17 75)"/>
+  <path d="M225 295h30M385 295h30" stroke="oklch(23% 0.035 255)" stroke-width="10" stroke-linecap="round"/>
+</svg>

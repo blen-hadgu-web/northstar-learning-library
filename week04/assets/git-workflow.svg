@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title">
+  <title id="title">Git workflow branches</title>
+  <rect width="640" height="420" fill="oklch(92% 0.055 255)"/>
+  <path d="M160 100v220M160 190c0 0 75 0 75 70v60M160 250c0 0 145 0 145-90v-60" fill="none" stroke="oklch(48% 0.19 255)" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="160" cy="90" r="34" fill="oklch(76% 0.12 170)"/>
+  <circle cx="160" cy="330" r="34" fill="oklch(76% 0.12 170)"/>
+  <circle cx="235" cy="330" r="34" fill="oklch(82% 0.17 75)"/>
+  <circle cx="305" cy="90" r="34" fill="oklch(82% 0.17 75)"/>
+  <rect x="370" y="90" width="170" height="48" rx="24" fill="oklch(23% 0.035 255)"/>
+  <rect x="370" y="180" width="120" height="28" rx="14" fill="oklch(63% 0.05 255)"/>
+  <rect x="370" y="235" width="165" height="28" rx="14" fill="oklch(70% 0.04 255)"/>
+  <rect x="370" y="290" width="135" height="28" rx="14" fill="oklch(76% 0.03 255)"/>
+</svg>

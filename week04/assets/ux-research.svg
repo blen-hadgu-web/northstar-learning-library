@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title">
+  <title id="title">Inclusive user research toolkit</title>
+  <rect width="640" height="420" fill="oklch(94% 0.04 75)"/>
+  <circle cx="170" cy="150" r="62" fill="oklch(76% 0.12 170)"/>
+  <circle cx="330" cy="120" r="50" fill="oklch(72% 0.1 300)"/>
+  <circle cx="475" cy="175" r="58" fill="oklch(48% 0.19 255)"/>
+  <path d="M125 275c70-65 150-45 205 10s120 60 190 0" fill="none" stroke="oklch(23% 0.035 255)" stroke-width="12" stroke-linecap="round"/>
+  <rect x="95" y="315" width="150" height="34" rx="17" fill="oklch(60% 0.06 75)"/>
+  <rect x="270" y="315" width="110" height="34" rx="17" fill="oklch(67% 0.06 75)"/>
+  <rect x="405" y="315" width="145" height="34" rx="17" fill="oklch(73% 0.05 75)"/>
+  <path d="M135 135h70M295 105h70M440 160h70" stroke="oklch(98% 0.01 250)" stroke-width="12" stroke-linecap="round"/>
+</svg>

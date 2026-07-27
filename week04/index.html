@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Week 04 asymmetric responsive resource grid for Northstar Learning Library."
+  >
+  <meta name="author" content="Blen Hadgu">
+  <meta name="color-scheme" content="light dark">
+  <title>Week 04 Asymmetric Grid Hub | Northstar Learning Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="portal-shell">
+  <a class="skip-link" href="#catalog-workspace">Skip to catalog workspace</a>
+
+  <header class="portal-header">
+    <a class="portal-brand" href="../" aria-label="Northstar Learning Library home">
+      <span aria-hidden="true">✦</span>
+      Northstar Learning Library
+    </a>
+
+    <nav class="primary-navigation" aria-label="Primary navigation">
+      <ul>
+        <li><a href="#catalog-workspace" aria-current="page">Catalog</a></li>
+        <li><a href="#filter-rail">Filters</a></li>
+        <li><a href="#catalog-title">Featured resources</a></li>
+      </ul>
+    </nav>
+
+    <nav class="utility-navigation" aria-label="Project navigation">
+      <ul>
+        <li><a href="../week02/">Week 02</a></li>
+        <li><a href="../week03/">Week 03</a></li>
+        <li><a href="../">Milestones</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside class="filter-rail" id="filter-rail" aria-labelledby="filter-title">
+    <header class="rail-heading">
+      <p class="frame-label">Discovery controls</p>
+      <h2 id="filter-title">Filter resources</h2>
+    </header>
+
+    <form class="filter-form">
+      <fieldset>
+        <legend>Topic</legend>
+        <label>
+          <input type="checkbox" name="topic" value="web-development">
+          Web development
+        </label>
+        <label>
+          <input type="checkbox" name="topic" value="accessibility">
+          Accessibility
+        </label>
+        <label>
+          <input type="checkbox" name="topic" value="computer-science">
+          Computer science
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Level</legend>
+        <label>
+          <input type="checkbox" name="level" value="beginner">
+          Beginner
+        </label>
+        <label>
+          <input type="checkbox" name="level" value="intermediate">
+          Intermediate
+        </label>
+        <label>
+          <input type="checkbox" name="level" value="advanced">
+          Advanced
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Format</legend>
+        <label>
+          <input type="checkbox" name="format" value="learning-path">
+          Learning path
+        </label>
+        <label>
+          <input type="checkbox" name="format" value="course">
+          Course
+        </label>
+        <label>
+          <input type="checkbox" name="format" value="guide">
+          Guide
+        </label>
+      </fieldset>
+
+      <button type="reset">Reset filters</button>
+    </form>
+  </aside>
+
+  <main class="catalog-workspace" id="catalog-workspace">
+    <header class="workspace-header">
+      <p class="frame-label">Week 04 responsive content hub</p>
+      <h1>Explore curated learning paths</h1>
+      <p>
+        A featured learning path anchors an asymmetric editorial grid while five
+        supporting resources fill the remaining tracks through dense auto-placement.
+      </p>
+    </header>
+
+    <nav class="catalog-toolbar" aria-label="Catalog view controls">
+      <ul>
+        <li><a href="#catalog-title" aria-current="page">Editorial grid</a></li>
+        <li><a href="#filter-rail">Refine results</a></li>
+        <li><a href="#grid-notes">Grid notes</a></li>
+      </ul>
+    </nav>
+
+    <section class="catalog-stage" id="catalog-stage" aria-labelledby="catalog-title">
+      <header class="stage-heading">
+        <p class="frame-label">Asymmetric resource collection</p>
+        <h2 id="catalog-title">Recommended for emerging technologists</h2>
+        <p>
+          Six cards use fluid fractional tracks. The featured card spans two columns
+          and two rows on wide screens.
+        </p>
+      </header>
+
+      <ol class="catalog-grid" aria-label="Curated technology-learning resources">
+        <li class="catalog-item catalog-item--hero">
+          <article class="resource-card resource-card--hero">
+            <figure class="resource-card__media">
+              <img
+                src="assets/accessible-web.svg"
+                alt="Illustration of a browser interface surrounded by accessibility symbols"
+                width="960"
+                height="720"
+              >
+            </figure>
+
+            <section class="resource-card__content">
+              <header class="resource-card__header">
+                <p class="resource-card__badge">Featured learning path</p>
+                <h3>Accessible Web Foundations</h3>
+              </header>
+
+              <p class="resource-card__summary">
+                Build semantic pages, evaluate keyboard access, measure color
+                contrast, and create interfaces that support a wider range of users.
+              </p>
+
+              <dl class="resource-card__meta">
+                <div>
+                  <dt>Level</dt>
+                  <dd>Beginner</dd>
+                </div>
+                <div>
+                  <dt>Format</dt>
+                  <dd>8 modules</dd>
+                </div>
+                <div>
+                  <dt>Pace</dt>
+                  <dd>Self-guided</dd>
+                </div>
+              </dl>
+
+              <a class="resource-card__link" href="#grid-notes">
+                Explore the featured path
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </article>
+        </li>
+
+        <li class="catalog-item">
+          <article class="resource-card">
+            <figure class="resource-card__media">
+              <img
+                src="assets/git-workflow.svg"
+                alt="Illustration of connected Git branches and repository commits"
+                width="640"
+                height="420"
+              >
+            </figure>
+
+            <section class="resource-card__content">
+              <header class="resource-card__header">
+                <p class="resource-card__badge">Workflow course</p>
+                <h3>Git &amp; GitHub Workflow</h3>
+              </header>
+
+              <p class="resource-card__summary">
+                Practice branches, commits, pull requests, and collaborative reviews.
+              </p>
+
+              <dl class="resource-card__meta">
+                <div>
+                  <dt>Level</dt>
+                  <dd>Beginner</dd>
+                </div>
+                <div>
+                  <dt>Time</dt>
+                  <dd>3 hours</dd>
+                </div>
+              </dl>
+
+              <a class="resource-card__link" href="#grid-notes">
+                View course
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </article>
+        </li>
+
+        <li class="catalog-item">
+          <article class="resource-card">
+            <figure class="resource-card__media">
+              <img
+                src="assets/css-layout.svg"
+                alt="Illustration of responsive CSS Grid and Flexbox layout tracks"
+                width="640"
+                height="420"
+              >
+            </figure>
+
+            <section class="resource-card__content">
+              <header class="resource-card__header">
+                <p class="resource-card__badge">Visual guide</p>
+                <h3>CSS Layout Systems</h3>
+              </header>
+
+              <p class="resource-card__summary">
+                Compare Grid, Flexbox, intrinsic sizing, and responsive layout math.
+              </p>
+
+              <dl class="resource-card__meta">
+                <div>
+                  <dt>Level</dt>
+                  <dd>Intermediate</dd>
+                </div>
+                <div>
+                  <dt>Format</dt>
+                  <dd>Guide</dd>
+                </div>
+              </dl>
+
+              <a class="resource-card__link" href="#grid-notes">
+                Open guide
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </article>
+        </li>
+
+        <li class="catalog-item">
+          <article class="resource-card">
+            <figure class="resource-card__media">
+              <img
+                src="assets/ux-research.svg"
+                alt="Illustration of research notes, interview bubbles, and a user journey"
+                width="640"
+                height="420"
+              >
+            </figure>
+
+            <section class="resource-card__content">
+              <header class="resource-card__header">
+                <p class="resource-card__badge">Research toolkit</p>
+                <h3>Inclusive UX Research</h3>
+              </header>
+
+              <p class="resource-card__summary">
+                Plan interviews and usability sessions that include diverse needs.
+              </p>
+
+              <dl class="resource-card__meta">
+                <div>
+                  <dt>Level</dt>
+                  <dd>Intermediate</dd>
+                </div>
+                <div>
+                  <dt>Format</dt>
+                  <dd>Toolkit</dd>
+                </div>
+              </dl>
+
+              <a class="resource-card__link" href="#grid-notes">
+                Review toolkit
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </article>
+        </li>
+
+        <li class="catalog-item">
+          <article class="resource-card">
+            <figure class="resource-card__media">
+              <img
+                src="assets/javascript.svg"
+                alt="Illustration of JavaScript code blocks and interactive controls"
+                width="640"
+                height="420"
+              >
+            </figure>
+
+            <section class="resource-card__content">
+              <header class="resource-card__header">
+                <p class="resource-card__badge">Interactive course</p>
+                <h3>JavaScript Essentials</h3>
+              </header>
+
+              <p class="resource-card__summary">
+                Learn functions, arrays, events, and DOM updates through small projects.
+              </p>
+
+              <dl class="resource-card__meta">
+                <div>
+                  <dt>Level</dt>
+                  <dd>Beginner</dd>
+                </div>
+                <div>
+                  <dt>Time</dt>
+                  <dd>6 hours</dd>
+                </div>
+              </dl>
+
+              <a class="resource-card__link" href="#grid-notes">
+                Start course
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </article>
+        </li>
+
+        <li class="catalog-item">
+          <article class="resource-card">
+            <figure class="resource-card__media">
+              <img
+                src="assets/algorithms.svg"
+                alt="Illustration of linked nodes, a stack, and an ordered sequence"
+                width="640"
+                height="420"
+              >
+            </figure>
+
+            <section class="resource-card__content">
+              <header class="resource-card__header">
+                <p class="resource-card__badge">Study guide</p>
+                <h3>Data Structures &amp; Algorithms</h3>
+              </header>
+
+              <p class="resource-card__summary">
+                Review arrays, linked structures, stacks, queues, and search strategies.
+              </p>
+
+              <dl class="resource-card__meta">
+                <div>
+                  <dt>Level</dt>
+                  <dd>Intermediate</dd>
+                </div>
+                <div>
+                  <dt>Format</dt>
+                  <dd>Study guide</dd>
+                </div>
+              </dl>
+
+              <a class="resource-card__link" href="#grid-notes">
+                Study concepts
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </article>
+        </li>
+      </ol>
+    </section>
+
+    <aside class="grid-notes" id="grid-notes" aria-labelledby="grid-notes-title">
+      <header>
+        <p class="frame-label">Verification note</p>
+        <h2 id="grid-notes-title">How the grid stays balanced</h2>
+      </header>
+      <p>
+        The three desktop columns use equal fractional tracks. The featured card spans
+        two columns and two rows, while <code>grid-auto-flow: dense</code> allows the
+        browser to backfill available positions as the number of tracks changes.
+      </p>
+    </aside>
+  </main>
+
+  <footer class="portal-footer">
+    <p>Week 04 · The Asymmetric Responsive Grid Hub</p>
+
+    <nav aria-label="Secondary navigation">
+      <ul>
+        <li><a href="../week02/">Design tokens</a></li>
+        <li><a href="../week03/">Structural frame</a></li>
+        <li><a href="../">Project home</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>
