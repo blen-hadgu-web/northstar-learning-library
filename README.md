@@ -32,9 +32,6 @@ The application includes:
 northstar-learning-library/
 ├── index.html
 ├── README.md
-├── SUBMISSION.txt
-├── SUBMISSION-WEEK03.txt
-├── SUBMISSION-WEEK04.txt
 ├── week02/
 │   ├── index.html
 │   └── styles.css
@@ -42,7 +39,6 @@ northstar-learning-library/
 │   ├── index.html
 │   ├── styles.css
 │   ├── TESTING-CHECKLIST.md
-│   └── VIDEO-SCRIPT.md
 └── week04/
     ├── assets/
     │   ├── accessible-web.svg
@@ -54,7 +50,6 @@ northstar-learning-library/
     ├── index.html
     ├── styles.css
     ├── TESTING-CHECKLIST.md
-    └── VIDEO-SCRIPT.md
 ```
 
 Every milestone remains at its original URL. Week 04 duplicates the Week 03 foundation into a new folder before adding the resource grid.
