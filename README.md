@@ -30,16 +30,12 @@ The planned application includes:
 northstar-learning-library/
 ├── index.html
 ├── README.md
-├── SUBMISSION.txt
-├── SUBMISSION-WEEK03.txt
 ├── week02/
 │   ├── index.html
 │   └── styles.css
 └── week03/
     ├── index.html
     ├── styles.css
-    ├── TESTING-CHECKLIST.md
-    └── VIDEO-SCRIPT.md
 ```
 
 Each milestone remains in its own directory. Week 03 was added without changing either Week 02 file.
