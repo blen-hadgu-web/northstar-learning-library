@@ -32,7 +32,6 @@ Planned structural elements:
 northstar-learning-library/
 ├── index.html
 ├── README.md
-├── SUBMISSION.txt
 └── week02/
     ├── index.html
     └── styles.css
