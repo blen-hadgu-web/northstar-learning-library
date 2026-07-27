@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Week 03 structural layout frame for Northstar Learning Library, an accessible curation and discovery portal."
+  >
+  <meta name="author" content="Blen Hadgu">
+  <meta name="color-scheme" content="light dark">
+  <title>Week 03 Structural Frame | Northstar Learning Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="portal-shell">
+  <a class="skip-link" href="#catalog-workspace">Skip to catalog workspace</a>
+
+  <header class="portal-header">
+    <a class="portal-brand" href="../" aria-label="Northstar Learning Library home">
+      <span aria-hidden="true">✦</span>
+      Northstar Learning Library
+    </a>
+
+    <nav class="primary-navigation" aria-label="Primary navigation">
+      <ul>
+        <li><a href="#catalog-workspace" aria-current="page">Catalog</a></li>
+        <li><a href="#filter-rail">Filters</a></li>
+        <li><a href="#catalog-stage">Collections</a></li>
+      </ul>
+    </nav>
+
+    <nav class="utility-navigation" aria-label="Project navigation">
+      <ul>
+        <li><a href="../week02/">Week 02</a></li>
+        <li><a href="../">Milestones</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside class="filter-rail" id="filter-rail" aria-labelledby="filter-title">
+    <header class="rail-heading">
+      <p class="frame-label">Discovery controls</p>
+      <h2 id="filter-title">Filter rail</h2>
+    </header>
+
+    <form class="filter-form">
+      <fieldset>
+        <legend>Topic</legend>
+        <label>
+          <input type="checkbox" name="topic" value="web-development">
+          Web development
+        </label>
+        <label>
+          <input type="checkbox" name="topic" value="accessibility">
+          Accessibility
+        </label>
+        <label>
+          <input type="checkbox" name="topic" value="computer-science">
+          Computer science
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Level</legend>
+        <label>
+          <input type="checkbox" name="level" value="beginner">
+          Beginner
+        </label>
+        <label>
+          <input type="checkbox" name="level" value="intermediate">
+          Intermediate
+        </label>
+        <label>
+          <input type="checkbox" name="level" value="advanced">
+          Advanced
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Format</legend>
+        <label>
+          <input type="checkbox" name="format" value="article">
+          Article
+        </label>
+        <label>
+          <input type="checkbox" name="format" value="course">
+          Course
+        </label>
+        <label>
+          <input type="checkbox" name="format" value="video">
+          Video
+        </label>
+      </fieldset>
+
+      <button type="reset">Reset filters</button>
+    </form>
+  </aside>
+
+  <main class="catalog-workspace" id="catalog-workspace">
+    <header class="workspace-header">
+      <p class="frame-label">Week 03 structural frame</p>
+      <h1>Discover learning resources</h1>
+      <p>
+        This milestone establishes the global header, navigation, filter rail,
+        catalog workspace, and footer without adding final resource content.
+      </p>
+    </header>
+
+    <nav class="catalog-toolbar" aria-label="Catalog view controls">
+      <ul>
+        <li><a href="#catalog-stage" aria-current="page">Grid frame</a></li>
+        <li><a href="#catalog-stage">List frame</a></li>
+        <li><a href="#catalog-stage">Comparison frame</a></li>
+      </ul>
+    </nav>
+
+    <section class="catalog-stage" id="catalog-stage" aria-labelledby="catalog-title">
+      <header class="stage-heading">
+        <p class="frame-label">Primary content zone</p>
+        <h2 id="catalog-title">Responsive catalog grid</h2>
+        <p>Reserved card positions show the future catalog structure only.</p>
+      </header>
+
+      <ol class="catalog-grid" aria-label="Reserved resource-card positions">
+        <li>
+          <article class="resource-slot">
+            <h3 class="visually-hidden">Reserved resource card position one</h3>
+          </article>
+        </li>
+        <li>
+          <article class="resource-slot">
+            <h3 class="visually-hidden">Reserved resource card position two</h3>
+          </article>
+        </li>
+        <li>
+          <article class="resource-slot">
+            <h3 class="visually-hidden">Reserved resource card position three</h3>
+          </article>
+        </li>
+        <li>
+          <article class="resource-slot">
+            <h3 class="visually-hidden">Reserved resource card position four</h3>
+          </article>
+        </li>
+        <li>
+          <article class="resource-slot">
+            <h3 class="visually-hidden">Reserved resource card position five</h3>
+          </article>
+        </li>
+        <li>
+          <article class="resource-slot">
+            <h3 class="visually-hidden">Reserved resource card position six</h3>
+          </article>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="portal-footer">
+    <p>Week 03 · Structural Frames &amp; Semantic Navigation</p>
+
+    <nav aria-label="Secondary navigation">
+      <ul>
+        <li><a href="../week02/">Design tokens</a></li>
+        <li><a href="../">Project home</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>
