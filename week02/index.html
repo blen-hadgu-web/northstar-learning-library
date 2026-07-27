@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Week 02 design system tokens for the Northstar Learning Library capstone project."
+  >
+  <title>Week 02 Design System | Northstar Learning Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="primary-nav wrapper" aria-label="Primary navigation">
+      <a class="brand" href="../">Northstar Learning Library</a>
+      <ul>
+        <li><a href="../">Milestones</a></li>
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#spacing">Spacing</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero wrapper" aria-labelledby="page-title">
+      <p class="eyebrow">Week 02 · Global token blueprint</p>
+      <h1 id="page-title">A flexible design system for accessible discovery</h1>
+      <p class="hero-copy">
+        These tokens establish the color, typography, and spacing rules that will guide
+        every future milestone of the Northstar Learning Library.
+      </p>
+      <ul class="hero-meta" aria-label="Project summary">
+        <li><strong>Archetype:</strong> Curation &amp; Discovery Portal</li>
+        <li><strong>Theme:</strong> Accessible technology learning</li>
+        <li><strong>Author:</strong> Blen Hadgu</li>
+      </ul>
+    </section>
+
+    <section class="content-section wrapper" aria-labelledby="foundation-title">
+      <header class="section-heading">
+        <p class="eyebrow">Design direction</p>
+        <h2 id="foundation-title">Token foundation</h2>
+      </header>
+
+      <article class="feature-card">
+        <h3>System goals</h3>
+        <ul class="feature-list">
+          <li>Use calm, trustworthy colors that support extended reading.</li>
+          <li>Keep text readable in both light and dark environments.</li>
+          <li>Allow headings to scale without depending on viewport units alone.</li>
+          <li>Use a predictable spacing rhythm across future layouts.</li>
+        </ul>
+      </article>
+
+      <aside class="callout" aria-labelledby="future-title">
+        <h3 id="future-title">How these tokens will be used</h3>
+        <p>
+          Future resource cards, filters, search controls, and comparison widgets will
+          reference these custom properties instead of declaring one-off values.
+        </p>
+      </aside>
+    </section>
+
+    <section class="content-section wrapper" id="colors" aria-labelledby="colors-title">
+      <header class="section-heading">
+        <p class="eyebrow">Perceptual color</p>
+        <h2 id="colors-title">OKLCH color system</h2>
+        <p>
+          The background and text pairs are intentionally far apart on the OKLCH
+          lightness axis. The calculated contrast is approximately
+          <strong>15.71:1 in light mode</strong> and
+          <strong>16.06:1 in dark mode</strong>, exceeding the WCAG AA requirement
+          for normal text.
+        </p>
+      </header>
+
+      <section class="token-grid" aria-label="Light and dark color previews">
+        <article class="theme-preview theme-preview--light">
+          <header>
+            <p class="theme-label">Light mode</p>
+            <h3>Clear daylight reading</h3>
+          </header>
+          <p>
+            A high-lightness blue-white background is paired with a low-lightness navy
+            text color.
+          </p>
+          <ul class="swatch-list" aria-label="Light mode tokens">
+            <li class="swatch swatch--light-background">
+              <strong>Background</strong>
+              <code>oklch(97.5% 0.015 250)</code>
+            </li>
+            <li class="swatch swatch--light-text">
+              <strong>Text</strong>
+              <code>oklch(23% 0.035 255)</code>
+            </li>
+            <li class="swatch swatch--primary">
+              <strong>Primary</strong>
+              <code>oklch(48% 0.19 255)</code>
+            </li>
+            <li class="swatch swatch--secondary">
+              <strong>Secondary</strong>
+              <code>oklch(45% 0.13 170)</code>
+            </li>
+          </ul>
+        </article>
+
+        <article class="theme-preview theme-preview--dark">
+          <header>
+            <p class="theme-label">Dark mode</p>
+            <h3>Low-glare evening reading</h3>
+          </header>
+          <p>
+            A low-lightness navy background is paired with a high-lightness blue-white
+            text color.
+          </p>
+          <ul class="swatch-list" aria-label="Dark mode tokens">
+            <li class="swatch swatch--dark-background">
+              <strong>Background</strong>
+              <code>oklch(17% 0.025 255)</code>
+            </li>
+            <li class="swatch swatch--dark-text">
+              <strong>Text</strong>
+              <code>oklch(94% 0.015 250)</code>
+            </li>
+            <li class="swatch swatch--primary-dark">
+              <strong>Primary</strong>
+              <code>oklch(72% 0.15 250)</code>
+            </li>
+            <li class="swatch swatch--secondary-dark">
+              <strong>Secondary</strong>
+              <code>oklch(76% 0.12 170)</code>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </section>
+
+    <section class="content-section wrapper" id="typography" aria-labelledby="typography-title">
+      <header class="section-heading">
+        <p class="eyebrow">Fluid sizing</p>
+        <h2 id="typography-title">Typography scale</h2>
+        <p>
+          Each fluid token combines <code>rem</code> and <code>vw</code>. The
+          <code>rem</code> component ensures browser zoom continues to enlarge the text.
+        </p>
+      </header>
+
+      <section class="type-specimens" aria-label="Typography token specimens">
+        <article class="type-card">
+          <h3>Main title</h3>
+          <p class="specimen specimen--large">Discover knowledge with confidence.</p>
+          <dl>
+            <div>
+              <dt>Token</dt>
+              <dd><code>--size-heading-lg</code></dd>
+            </div>
+            <div>
+              <dt>Value</dt>
+              <dd><code>clamp(1.75rem, 1.31rem + 1.878vw, 3rem)</code></dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="type-card">
+          <h3>Section heading</h3>
+          <p class="specimen specimen--medium">Curated learning resources</p>
+          <dl>
+            <div>
+              <dt>Token</dt>
+              <dd><code>--size-heading-md</code></dd>
+            </div>
+            <div>
+              <dt>Value</dt>
+              <dd><code>clamp(1.25rem, 1.05rem + 0.85vw, 1.75rem)</code></dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="type-card">
+          <h3>Body copy</h3>
+          <p class="specimen specimen--base">
+            Resource descriptions remain comfortable to read at narrow and wide sizes.
+          </p>
+          <dl>
+            <div>
+              <dt>Token</dt>
+              <dd><code>--size-base</code></dd>
+            </div>
+            <div>
+              <dt>Value</dt>
+              <dd><code>clamp(1rem, 0.96rem + 0.2vw, 1.125rem)</code></dd>
+            </div>
+          </dl>
+        </article>
+      </section>
+
+      <article class="calculation-card">
+        <h3>How the main-title formula was calculated</h3>
+        <ol>
+          <li><strong>Minimum:</strong> 1.75rem = 28px at a 375px viewport.</li>
+          <li><strong>Maximum:</strong> 3rem = 48px at a 1440px viewport.</li>
+          <li>
+            <strong>Slope:</strong> (48 − 28) ÷ (1440 − 375) =
+            20 ÷ 1065 ≈ 0.01878.
+          </li>
+          <li>
+            Convert the slope to viewport units:
+            0.01878 × 100 ≈ 1.878vw.
+          </li>
+          <li>
+            <strong>Intercept:</strong> 28 − (0.01878 × 375) ≈ 20.96px,
+            or approximately 1.31rem.
+          </li>
+          <li>
+            Final token:
+            <code>clamp(1.75rem, 1.31rem + 1.878vw, 3rem)</code>.
+          </li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="content-section wrapper" id="spacing" aria-labelledby="spacing-title">
+      <header class="section-heading">
+        <p class="eyebrow">Consistent rhythm</p>
+        <h2 id="spacing-title">Spacing constants</h2>
+        <p>
+          The scale uses relative <code>rem</code> units so spacing responds to the
+          user’s root font-size preferences.
+        </p>
+      </header>
+
+      <ol class="spacing-scale">
+        <li>
+          <article>
+            <h3>Extra small</h3>
+            <code>--space-xs: 0.25rem</code>
+            <p class="space-demo space-demo--xs" aria-label="0.25 rem spacing example"></p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <h3>Small</h3>
+            <code>--space-sm: 0.5rem</code>
+            <p class="space-demo space-demo--sm" aria-label="0.5 rem spacing example"></p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <h3>Medium</h3>
+            <code>--space-md: 1rem</code>
+            <p class="space-demo space-demo--md" aria-label="1 rem spacing example"></p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <h3>Large</h3>
+            <code>--space-lg: 2rem</code>
+            <p class="space-demo space-demo--lg" aria-label="2 rem spacing example"></p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <h3>Extra large</h3>
+            <code>--space-xl: 4rem</code>
+            <p class="space-demo space-demo--xl" aria-label="4 rem spacing example"></p>
+          </article>
+        </li>
+      </ol>
+    </section>
+
+    <section class="content-section wrapper" aria-labelledby="ai-title">
+      <header class="section-heading">
+        <p class="eyebrow">Co-piloting record</p>
+        <h2 id="ai-title">AI prompts and decisions</h2>
+      </header>
+
+      <article class="prompt-card">
+        <h3>Palette prompt</h3>
+        <blockquote>
+          <p>
+            “I am building a curation and discovery portal for accessible technology
+            learning in OKLCH color space. I want a dark/light mode setup. Can you
+            output a CSS :root block with color variables utilizing oklch()? The
+            background and text colors must pass WCAG AA contrast guidelines. Please
+            explain the math behind the Lightness (L) levels you chose for both light
+            and dark mode to guarantee contrast.”
+          </p>
+        </blockquote>
+        <p>
+          I used the response as a starting point, then selected a light background at
+          L=97.5% with text at L=23%, and a dark background at L=17% with text at
+          L=94%. I verified the resulting contrast before adding the tokens.
+        </p>
+      </article>
+
+      <article class="prompt-card">
+        <h3>Fluid-scale prompt</h3>
+        <blockquote>
+          <p>
+            “I need a CSS custom property for a main title font size that scales
+            fluidly. It should have a minimum size of 1.75rem at 375px viewport width,
+            and a maximum size of 3rem at 1440px viewport width. Can you write the
+            clamp() property using a mix of rem and vw, and break down exactly how the
+            middle viewport-width expression is calculated?”
+          </p>
+        </blockquote>
+        <p>
+          The calculated expression became
+          <code>clamp(1.75rem, 1.31rem + 1.878vw, 3rem)</code>. I retained the
+          <code>rem</code> component to support browser zoom.
+        </p>
+      </article>
+    </section>
+
+    <section class="content-section wrapper" aria-labelledby="verification-title">
+      <header class="section-heading">
+        <p class="eyebrow">Manual audit</p>
+        <h2 id="verification-title">Verification checklist</h2>
+      </header>
+
+      <ul class="checklist">
+        <li>
+          <strong>200% zoom:</strong> Text grows because all fluid formulas include
+          relative <code>rem</code> values.
+        </li>
+        <li>
+          <strong>No overwriting:</strong> The root <code>index.html</code> links
+          directly to <code>/week02/index.html</code>.
+        </li>
+        <li>
+          <strong>Contrast:</strong> Both background/text pairs exceed 4.5:1.
+        </li>
+        <li>
+          <strong>Responsive layout:</strong> Grids collapse to one column on narrow
+          screens without horizontal page scrolling.
+        </li>
+        <li>
+          <strong>Keyboard access:</strong> All links have visible
+          <code>:focus-visible</code> indicators.
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="wrapper">
+      Week 02 milestone · Northstar Learning Library · Created by Blen Hadgu
+    </p>
+  </footer>
+</body>
+</html>
