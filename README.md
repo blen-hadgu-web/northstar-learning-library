@@ -9,6 +9,7 @@ Northstar Learning Library is a progressive capstone project by **Blen Hadgu**. 
 - Week 03 structural frame: `https://blen-hadgu-web.github.io/northstar-learning-library/week03/`
 - Week 04 asymmetric grid: `https://blen-hadgu-web.github.io/northstar-learning-library/week04/`
 - Week 05 CSS architecture: `https://blen-hadgu-web.github.io/northstar-learning-library/week05/`
+- Week 06 container queries: `https://blen-hadgu-web.github.io/northstar-learning-library/week06/`
 
 ## Public Repository
 
@@ -27,7 +28,6 @@ northstar-learning-library/
 │   ├── index.html
 │   ├── styles.css
 │   ├── TESTING-CHECKLIST.md
-│   └── VIDEO-SCRIPT.md
 ├── week04/
 │   ├── assets/
 │   │   ├── accessible-web.svg
@@ -39,7 +39,19 @@ northstar-learning-library/
 │   ├── index.html
 │   ├── styles.css
 │   ├── TESTING-CHECKLIST.md
-└── week05/
+├── week05/
+│   ├── assets/
+│   │   ├── accessible-web.svg
+│   │   ├── algorithms.svg
+│   │   ├── css-layout.svg
+│   │   ├── git-workflow.svg
+│   │   ├── javascript.svg
+│   │   └── ux-research.svg
+│   ├── index.html
+│   ├── styles.css
+│   ├── ARCHITECTURE-AUDIT.txt
+│   ├── TESTING-CHECKLIST.md
+└── week06/
     ├── assets/
     │   ├── accessible-web.svg
     │   ├── algorithms.svg
@@ -50,10 +62,11 @@ northstar-learning-library/
     ├── index.html
     ├── styles.css
     ├── ARCHITECTURE-AUDIT.txt
+    ├── CONTAINER-AUDIT.txt
     ├── TESTING-CHECKLIST.md
 ```
 
-Week 05 duplicates the Week 04 page and assets into a new directory. The Week 05 HTML is byte-for-byte identical to Week 04; only the copied stylesheet is architecturally refactored.
+Week 06 duplicates the Week 05 foundation into a new directory. All previous milestone directories (Weeks 02 through 05) remain unmodified.
 
 ## Run Locally
 
@@ -61,199 +74,216 @@ No package manager, CSS preprocessor, JavaScript framework, or build command is 
 
 1. Download or clone the repository.
 2. Open the root `index.html`.
-3. Use the milestone links to open Week 04 and Week 05 for comparison.
+3. Use the milestone links to open Week 05 or Week 06 for comparison.
 
 VS Code Live Server may also be used.
 
-# Week 05: Native Nesting & `@layer` Architecture
+# Week 02: Global Token Blueprint
 
-## Visual-continuity goal
+Week 02 established:
 
-The Week 05 page intentionally preserves the Week 04 content and visual hierarchy:
+- Light and dark OKLCH color variables
+- WCAG-aware foreground and background pairs
+- Fluid typography with `clamp()`
+- Relative spacing constants
+- Reusable surfaces, borders, focus, radius, and shadow tokens
+- Cascade layers
 
-- Same semantic HTML
-- Same local SVG assets
-- Same header and filter rail
-- Same asymmetric six-card grid
-- Same colors, spacing, shadows, and breakpoints
-
-The change is architectural rather than visual. An automated Chromium comparison found zero changed pixels at 1440×900, 1024×900, 768×1024, and 375×812.
-
-## Layer precedence
-
-The first statement in `week05/styles.css` is:
+Shared variables reused across all milestones include:
 
 ```css
-@layer reset, base, layout, components;
+--color-primary
+--color-secondary
+--color-background
+--color-surface
+--color-surface-raised
+--color-text
+--color-text-muted
+--color-border
+--color-focus
+
+--space-xs
+--space-sm
+--space-md
+--space-lg
+--space-xl
 ```
 
-The responsibilities are:
+# Week 03: Structural Frames & Semantic Navigation
 
-### `reset`
+Week 03 established:
 
-Structural browser-default cleanup:
-
-- Universal `box-sizing`
-- Default margin removal
-- List padding reset
-- Responsive image defaults
-- Form-control font inheritance
-
-### `base`
-
-Global design and element defaults:
-
-- Week 02 custom properties
-- Light and dark OKLCH tokens
-- Body typography and background
-- Heading, paragraph, link, code, and focus defaults
-
-### `layout`
-
-High-level frames inherited from Week 03:
-
-- Full dynamic-viewport portal shell
-- Global header grid
-- Filter sidebar
-- Main catalog workspace
+- Persistent header
+- Semantic navigation
+- Left filter `aside`
+- Flexible catalog `main`
 - Footer
-- Responsive frame rearrangement
+- Full dynamic-viewport frame
+- Responsive stacking
+- `minmax()` protection for the sidebar and main track
 
-### `components`
+# Week 04: The Asymmetric Responsive Grid Hub
 
-Specific interface pieces:
+Week 04 established:
 
-- Navigation links
-- Filter controls
-- Asymmetric grid
-- Resource cards
-- Hero modifier
-- Badges
-- Metadata
-- Card links
-- Grid note
-- Accessibility utility
+- Six curated resource cards using SVG illustrations
+- Featured hero card spanning 2 columns and 2 rows on desktop
+- Dense auto-placement with `grid-auto-flow: dense`
+- Fractional track scaling with `minmax(0, 1fr)`
 
-Because `components` is declared later than `base`, component rules win by layer precedence before selector specificity needs to be increased.
+# Week 05: Native Nesting & `@layer` Architecture
 
-## Native CSS nesting
+Week 05 established:
 
-Week 05 uses native nesting directly inside the `.css` file.
+- Strict four-layer cascade architecture (`reset`, `base`, `layout`, `components`)
+- Native CSS nesting using `&` parent selectors
+- Zero CSS build step or preprocessors required
+- Visual continuity preservation verified with Chromium pixel audits
 
-Example:
+# Week 06: Container Queries & Component-Level Fluidity
+
+Week 06 transitions the project from viewport-based responsiveness (`@media`) to component-level fluidity using CSS Container Queries (`@container`). Components now style themselves based on the inline width of their direct parent container.
+
+## 1. Establishing Container Contexts
+
+In `week06/styles.css` (inside `@layer components`), container contexts are defined on parent wrappers:
 
 ```css
+.catalog-item,
+.sidebar-card-slot {
+  container-type: inline-size;
+  min-inline-size: 0;
+  inline-size: 100%;
+}
+```
+
+By assigning `container-type: inline-size`, child elements inside `.catalog-item` and `.sidebar-card-slot` evaluate their container queries relative to that wrapper rather than the entire browser viewport.
+
+## 2. Component-Level Container Queries (`@container`)
+
+Card components default to a compact, vertically stacked format suitable for narrow spaces (< 480px). When their parent container reaches 480px or wider, a container query transforms the layout into a horizontal side-by-side arrangement:
+
+```css
+/* Base / Narrow Default Layout (< 480px) */
 .resource-card {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  block-size: 100%;
+  min-inline-size: 0;
+  ...
+}
 
-  &.resource-card--hero {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+/* Wide Container Transformation (>= 480px) */
+@container (min-width: 480px) {
+  .resource-card {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-rows: minmax(0, 1fr);
+
+    .resource-card__media {
+      min-block-size: 100%;
+      aspect-ratio: auto;
+    }
 
     .resource-card__content {
       align-content: center;
+      padding: clamp(var(--space-md), 3cqi, var(--space-lg));
+      gap: clamp(var(--space-sm), 2cqi, var(--space-md));
+    }
+
+    .resource-card__header h3 {
+      font-size: clamp(1.2rem, 1rem + 1.5cqi, 1.55rem);
     }
   }
 
-  .resource-card__link {
-    text-decoration: none;
+  .resource-card.resource-card--hero {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
 
-    &:hover {
-      text-decoration: underline;
+    .resource-card__content {
+      padding: clamp(var(--space-md), 4cqi, var(--space-xl));
     }
 
-    &:focus-visible {
-      outline: 0.22rem solid var(--color-focus);
+    .resource-card__header h3 {
+      font-size: clamp(1.35rem, 1.1rem + 2cqi, 1.85rem);
     }
   }
 }
 ```
 
-Other nested component roots include:
+## 3. Elimination of Media Query Dependencies for Cards
 
-- `.portal-header`
-- `.filter-form`
-- `.catalog-grid`
-- `.resource-card`
-- `.grid-notes`
+In Week 05, internal card layouts relied on viewport media queries (`@media (max-width: 70rem)` and `@media (max-width: 44rem)`). In Week 06, **all viewport media queries controlling internal card structure were removed**.
 
-## Parent selector usage
+Page-level media queries now only control macro shell geometry (`.portal-shell`, `.portal-header`, and `.catalog-grid` track count). When the macro grid rearranges from 3 tracks to 2 or 1, the card container sizes change and each card automatically responds through `@container`.
 
-The stylesheet uses `&` for:
+## 4. Relative Container Units (`cqi`)
 
-- `&:hover`
-- `&:focus`
-- `&:focus-visible`
-- `&[aria-current="page"]`
-- `&.catalog-item--hero`
-- `&.resource-card--hero`
+Week 06 incorporates `cqi` (container query inline size) units for fluid internal spacing, font scaling, and micro-interactions:
 
-It does not use Sass-only selector concatenation such as `&--hero`.
+- **Fluid heading clamp:** `font-size: clamp(1.05rem, 0.95rem + 1.8cqi, 1.35rem);`
+- **Fluid card content padding:** `padding: clamp(var(--space-sm), 4cqi, var(--space-md));`
+- **Fluid meta gap:** `gap: var(--space-xs) clamp(var(--space-sm), 2cqi, var(--space-md));`
+- **Fluid badge sizing:** `font-size: clamp(0.72rem, 0.68rem + 0.4cqi, 0.82rem);`
 
-## No preprocessor
+## 5. The Placement Test
 
-The project requires:
+To verify true context-awareness, `week06/index.html` implements the Placement Test:
 
-- No Sass
-- No PostCSS compilation
-- No npm command
-- No generated CSS
-- No source map
+1. **Sidebar Context (`<aside class="filter-rail">`):** A `.resource-card` is placed in `.sidebar-card-slot` (~250px wide). Because its container is below 480px, it automatically renders as a compact, vertically stacked reference card.
+2. **Main Catalog Context (`<main class="catalog-workspace">`):** The exact same `.resource-card` component is placed in the featured 2-column grid slot (> 500px wide). Because its container exceeds 480px, it automatically renders as an expansive horizontal card.
 
-The browser reads `week05/styles.css` directly.
+Both cards share identical HTML markup and classes without custom layout overrides.
 
 ## AI Tool and Prompts
 
 **AI tool:** ChatGPT
 
-### Prompt 1: Refactoring CSS to cascade layers
+### Prompt 1: Writing Container Queries
 
-> Here is my Week 04 stylesheet [paste CSS]. Modernize it by sorting the rules into exactly four cascade layers declared in this order: `reset`, `base`, `layout`, and `components`. Preserve the existing visual output. Put browser-default cleanup in reset, design tokens and element defaults in base, global header/sidebar/main/footer frames in layout, and navigation, forms, grids, cards, badges, and widgets in components. Keep responsive rules inside the layer that owns the affected rules. Explain why each group belongs in its layer.
+> I have a reusable card element called `.resource-card` containing an image and some text. I want to convert this card's styling to use CSS Container Queries instead of Media Queries. If its parent element is wider than 450px, the card should display horizontally. If its parent is narrower, it should stack vertically. Can you write the HTML structure and the nested CSS using `@container`?
 
-### Prompt 2: Refactoring to native nesting
+### Prompt 2: Refactoring Layouts for Container Queries
 
-> Analyze my Week 04 card, navigation, filter, and grid styles [paste component CSS]. Refactor them with native CSS nesting in a normal `.css` file. Nest child selectors beneath `.portal-header`, `.filter-form`, `.catalog-grid`, `.resource-card`, and `.grid-notes`. Use the parent selector for pseudo-classes and modifiers, including `&:hover`, `&:focus-visible`, `&[aria-current="page"]`, and `&.resource-card--hero`. Do not use Sass-only `&--modifier` syntax, and do not require a build process. Preserve the Week 04 visual output.
+> In my project, I have cards in my main asymmetric grid and cards in my sidebar aside. They currently look messy because the sidebar cards are being squished. Can you help me set `container-type: inline-size` on the parent elements of these card slots and show me how to refactor the cards to self-adjust perfectly?
 
 ## Human Audit
 
-### Visual continuity
+### DevTools Container Query Inspector
 
-Compare Week 04 and Week 05 at identical viewport sizes. The HTML and assets are identical, and the refactored declarations retain the same values for the live interface.
+1. Open DevTools in Chrome, Edge, Firefox, or Safari.
+2. Inspect `.catalog-item` and `.sidebar-card-slot` to verify active `container` badges.
+3. Inspect `.resource-card` and verify `@container (min-width: 480px)` rules in the Styles panel.
+4. Resize the browser window; confirm that cards smoothly switch layout states based on parent track dimensions.
 
-### Inspector layer audit
+### Multi-Context Comparison
 
-In DevTools:
-
-1. Inspect `.resource-card__badge` and find the `components` layer.
-2. Inspect `.catalog-workspace` and find the `layout` layer.
-3. Inspect an `h3` and find the `base` layer.
-4. Confirm that the browser displays nested rules rather than ignoring them.
-
-### Native-syntax check
-
-Verify:
-
-- The file is `styles.css`
-- Nested rules appear in DevTools
-- Hover and focus states work
-- Hero modifier rules apply
-- No `.scss` file exists
+- Inspect the sidebar card: confirmed vertically stacked layout.
+- Inspect the main catalog hero card: confirmed horizontal side-by-side layout.
+- No horizontal overflow or clipping occurs across 320px, 375px, 768px, 1024px, 1440px, and 2560px viewports.
 
 ## Testing and Video
 
-- Week 05 architecture audit: [`week05/ARCHITECTURE-AUDIT.txt`](week05/ARCHITECTURE-AUDIT.txt)
-- Week 05 checklist: [`week05/TESTING-CHECKLIST.md`](week05/TESTING-CHECKLIST.md)
-- Week 05 video script: [`week05/VIDEO-SCRIPT.md`](week05/VIDEO-SCRIPT.md)
-
-The separate “Web Project Testing & Quality Assurance Guide” was not included in the supplied assignment text. The prepared checklist covers archive preservation, visual continuity, layer inspection, nesting syntax, responsive behavior, keyboard access, zoom, and deployment.
+- Week 06 container audit: [`week06/CONTAINER-AUDIT.txt`](week06/CONTAINER-AUDIT.txt)
+- Week 06 architecture audit: [`week06/ARCHITECTURE-AUDIT.txt`](week06/ARCHITECTURE-AUDIT.txt)
+- Week 06 checklist: [`week06/TESTING-CHECKLIST.md`](week06/TESTING-CHECKLIST.md)
+- Week 06 video script: [`week06/VIDEO-SCRIPT.md`](week06/VIDEO-SCRIPT.md)
 
 ## Deployment
 
-GitHub Pages remains configured as:
+GitHub Pages is configured to deploy from:
 
 ```text
 Branch: main
 Folder: /(root)
 ```
+
+Opening all milestone URLs in an Incognito/Private window verifies the public archive:
+- Landing page: `/`
+- Week 02: `/week02/`
+- Week 03: `/week03/`
+- Week 04: `/week04/`
+- Week 05: `/week05/`
+- Week 06: `/week06/`
 
 ## Author
 
