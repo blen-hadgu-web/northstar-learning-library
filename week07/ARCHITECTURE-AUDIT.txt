@@ -1,0 +1,15 @@
+Week 07 Architecture, Micro-Interactions & Scroll Audit
+Northstar Learning Library
+
+Archive preservation
+- Week 02–06 historical integrity maintained: True
+- Week 07 created in separate progressive directory: True
+- Week 07 SVG assets copied into week07/assets/: True
+
+Layer Architecture & Motion Engineering
+- Cascade layers defined: reset, base, layout, components
+- Reading progress bar declared in @layer layout with animation-timeline: scroll()
+- Micro-interactions declared in @layer components utilizing transform and opacity
+- Scroll-reveal card animations declared in @layer components with animation-timeline: view()
+- Container queries from Week 06 preserved: True (@container (min-width: 480px) and @container (min-width: 720px))
+- Strict @media (prefers-reduced-motion: reduce) overrides present: True

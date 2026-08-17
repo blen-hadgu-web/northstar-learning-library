@@ -1,0 +1,44 @@
+Week 06 Container Queries & Component-Level Fluidity Audit
+Northstar Learning Library
+
+Archive preservation
+- Week 02 loads from /week02/: True
+- Week 03 loads from /week03/: True
+- Week 04 loads from /week04/: True
+- Week 05 loads from /week05/: True
+- Week 02–05 source files unmodified: True
+- Week 06 stored in dedicated directory: True
+- Week 06 assets preserved in week06/assets/: True
+
+Container contexts
+- Parent .catalog-item container-type: inline-size: True
+- Parent .sidebar-card-slot container-type: inline-size: True
+- Established container contexts count: 2
+- Container naming / containment syntax valid: True
+
+Container queries (@container)
+- Base card default: Compact vertical stack (< 480px)
+- Multi-layout query: @container (min-width: 480px) for horizontal layout
+- Hero wide query: @container (min-width: 720px) for expansive hero layout
+- Relative container units used: cqi (container query inline size)
+- cqi units applied to: card padding, title clamp(), badge size, summary size, link padding
+
+Media query audit on card components
+- Viewport @media queries controlling internal card layout: 0
+- Viewport @media queries controlling card grid column spans: 0 inside card rules
+- All internal card responsive adaptations handled exclusively by @container: True
+
+Placement test verification
+- Narrow container (<aside class="filter-rail"> / .sidebar-card-slot, ~250px wide):
+  Result: Resource card renders as a clean vertical stack (image top, content bottom).
+- Wide container (Main catalog hero track, > 500px wide):
+  Result: Resource card renders as an expansive horizontal layout (image left, content right).
+- Comparison: The identical .resource-card component automatically self-adjusts based solely on its direct parent container inline width.
+
+Cascade layer integrity
+- Layer order preserved: @layer reset, base, layout, components;
+- Container query rules located inside: @layer components
+- Native nesting syntax preserved: True
+- SCSS or preprocessors required: 0
+
+Result: Component-level fluidity achieved via native CSS Container Queries with zero viewport media query dependencies on card internals.
