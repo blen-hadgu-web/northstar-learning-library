@@ -10,6 +10,7 @@ Northstar Learning Library is a progressive capstone project by **Blen Hadgu**. 
 - Week 04 asymmetric grid: `https://blen-hadgu-web.github.io/northstar-learning-library/week04/`
 - Week 05 CSS architecture: `https://blen-hadgu-web.github.io/northstar-learning-library/week05/`
 - Week 06 container queries: `https://blen-hadgu-web.github.io/northstar-learning-library/week06/`
+- Week 07 micro-interactions: `https://blen-hadgu-web.github.io/northstar-learning-library/week07/`
 
 ## Public Repository
 
@@ -51,7 +52,20 @@ northstar-learning-library/
 │   ├── styles.css
 │   ├── ARCHITECTURE-AUDIT.txt
 │   ├── TESTING-CHECKLIST.md
-└── week06/
+├── week06/
+│   ├── assets/
+│   │   ├── accessible-web.svg
+│   │   ├── algorithms.svg
+│   │   ├── css-layout.svg
+│   │   ├── git-workflow.svg
+│   │   ├── javascript.svg
+│   │   └── ux-research.svg
+│   ├── index.html
+│   ├── styles.css
+│   ├── ARCHITECTURE-AUDIT.txt
+│   ├── CONTAINER-AUDIT.txt
+│   ├── TESTING-CHECKLIST.md
+└── week07/
     ├── assets/
     │   ├── accessible-web.svg
     │   ├── algorithms.svg
@@ -62,11 +76,11 @@ northstar-learning-library/
     ├── index.html
     ├── styles.css
     ├── ARCHITECTURE-AUDIT.txt
-    ├── CONTAINER-AUDIT.txt
-    ├── TESTING-CHECKLIST.md
+    ├── INTERACTION-AUDIT.txt
+    └── TESTING-CHECKLIST.md
 ```
 
-Week 06 duplicates the Week 05 foundation into a new directory. All previous milestone directories (Weeks 02 through 05) remain unmodified.
+Week 07 duplicates the Week 06 foundation into a new directory. All historical milestone directories (Weeks 02 through 06) remain unmodified.
 
 ## Run Locally
 
@@ -74,7 +88,7 @@ No package manager, CSS preprocessor, JavaScript framework, or build command is 
 
 1. Download or clone the repository.
 2. Open the root `index.html`.
-3. Use the milestone links to open Week 05 or Week 06 for comparison.
+3. Use the milestone links to open Week 06 or Week 07 for comparison.
 
 VS Code Live Server may also be used.
 
@@ -142,131 +156,190 @@ Week 05 established:
 
 # Week 06: Container Queries & Component-Level Fluidity
 
-Week 06 transitions the project from viewport-based responsiveness (`@media`) to component-level fluidity using CSS Container Queries (`@container`). Components now style themselves based on the inline width of their direct parent container.
+Week 06 established:
 
-## 1. Establishing Container Contexts
+- Container contexts established on parent card slots via `container-type: inline-size`
+- Component queries (`@container (min-width: 480px)`) driving horizontal card layout
+- Complete elimination of viewport `@media` queries on card internals
+- Relative container units (`cqi`) for fluid card typography, padding, and micro-spacing
+- The Placement Test verifying context-aware card styling in narrow sidebar vs wide catalog track
 
-In `week06/styles.css` (inside `@layer components`), container contexts are defined on parent wrappers:
+# Week 07: Micro-Interactions & Scroll-Driven Enhancements
+
+Week 07 integrates polished, hardware-accelerated micro-interactions and native CSS scroll-driven animations without any external JavaScript animation libraries.
+
+## 1. High-Performance Micro-Interactions
+
+All interactive elements feature hardware-accelerated transitions that animate only compositor-friendly properties (`transform`, `opacity`, `background-color`, `box-shadow`) to avoid layout recalculations and repaint penalties:
+
+- **Resource Card Lift & Elevation:**
+  Hovering or focusing inside `.resource-card` elevates the card (`translateY(-0.35rem) scale(1.012)`) with smooth shadow expansion (`--shadow-hover`).
+- **Media Scale Interaction:**
+  The card illustration gently zooms (`transform: scale(1.05)`) within its clipping boundary.
+- **Action Link Glide:**
+  Hovering over card links slides the arrow icon (`transform: translateX(0.4rem)`).
+- **Tactile Button Feedback:**
+  Buttons deliver instant active tactile feedback on click/press (`transform: translateY(0.0625rem) scale(0.97)`).
+- **Navigation Item Lift:**
+  Header and footer navigation links produce smooth background color shifts and micro-lifts (`translateY(-0.0625rem)`).
+- **Interactive Form Inputs:**
+  Filter checkboxes scale on hover (`scale(1.1)`) and filter labels smoothly highlight and slide.
 
 ```css
-.catalog-item,
-.sidebar-card-slot {
-  container-type: inline-size;
-  min-inline-size: 0;
-  inline-size: 100%;
-}
-```
-
-By assigning `container-type: inline-size`, child elements inside `.catalog-item` and `.sidebar-card-slot` evaluate their container queries relative to that wrapper rather than the entire browser viewport.
-
-## 2. Component-Level Container Queries (`@container`)
-
-Card components default to a compact, vertically stacked format suitable for narrow spaces (< 480px). When their parent container reaches 480px or wider, a container query transforms the layout into a horizontal side-by-side arrangement:
-
-```css
-/* Base / Narrow Default Layout (< 480px) */
 .resource-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: auto minmax(0, 1fr);
-  block-size: 100%;
-  min-inline-size: 0;
-  ...
-}
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+  will-change: transform, box-shadow;
 
-/* Wide Container Transformation (>= 480px) */
-@container (min-width: 480px) {
-  .resource-card {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    grid-template-rows: minmax(0, 1fr);
+  &:hover,
+  &:focus-within {
+    transform: translateY(-0.35rem) scale(1.012);
+    border-color: color-mix(in oklch, var(--color-primary) 45%, var(--color-border));
+    box-shadow: var(--shadow-hover);
 
-    .resource-card__media {
-      min-block-size: 100%;
-      aspect-ratio: auto;
+    .resource-card__media img {
+      transform: scale(1.05);
     }
 
-    .resource-card__content {
-      align-content: center;
-      padding: clamp(var(--space-md), 3cqi, var(--space-lg));
-      gap: clamp(var(--space-sm), 2cqi, var(--space-md));
-    }
-
-    .resource-card__header h3 {
-      font-size: clamp(1.2rem, 1rem + 1.5cqi, 1.55rem);
-    }
-  }
-
-  .resource-card.resource-card--hero {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-
-    .resource-card__content {
-      padding: clamp(var(--space-md), 4cqi, var(--space-xl));
-    }
-
-    .resource-card__header h3 {
-      font-size: clamp(1.35rem, 1.1rem + 2cqi, 1.85rem);
+    .resource-card__link span {
+      transform: translateX(0.4rem);
     }
   }
 }
 ```
 
-## 3. Elimination of Media Query Dependencies for Cards
+## 2. Active and Focus States
 
-In Week 05, internal card layouts relied on viewport media queries (`@media (max-width: 70rem)` and `@media (max-width: 44rem)`). In Week 06, **all viewport media queries controlling internal card structure were removed**.
+Every interactive element incorporates an accessible, high-contrast `:focus-visible` ring utilizing `--color-focus`. Micro-interactions trigger equally on keyboard focus (`:focus-within` on cards) as on mouse hover, ensuring full parity for keyboard navigators.
 
-Page-level media queries now only control macro shell geometry (`.portal-shell`, `.portal-header`, and `.catalog-grid` track count). When the macro grid rearranges from 3 tracks to 2 or 1, the card container sizes change and each card automatically responds through `@container`.
+## 3. Modern CSS Scroll-Driven Animations
 
-## 4. Relative Container Units (`cqi`)
+Week 07 implements two native CSS scroll-driven animation systems using the web platform's `scroll()` and `view()` animation timelines:
 
-Week 06 incorporates `cqi` (container query inline size) units for fluid internal spacing, font scaling, and micro-interactions:
+### Option A: Global Reading Progress Indicator
 
-- **Fluid heading clamp:** `font-size: clamp(1.05rem, 0.95rem + 1.8cqi, 1.35rem);`
-- **Fluid card content padding:** `padding: clamp(var(--space-sm), 4cqi, var(--space-md));`
-- **Fluid meta gap:** `gap: var(--space-xs) clamp(var(--space-sm), 2cqi, var(--space-md));`
-- **Fluid badge sizing:** `font-size: clamp(0.72rem, 0.68rem + 0.4cqi, 0.82rem);`
+A slim top progress indicator (`.scroll-progress-bar`) fills horizontally as the user scrolls through the page:
 
-## 5. The Placement Test
+```css
+.scroll-progress-bar {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 0.25rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-focus)
+  );
+  transform-origin: 0 50%;
+  z-index: 1000;
+  pointer-events: none;
+}
 
-To verify true context-awareness, `week06/index.html` implements the Placement Test:
+@supports (animation-timeline: scroll()) {
+  .scroll-progress-bar {
+    animation: scale-progress auto linear both;
+    animation-timeline: scroll(root);
+  }
+}
 
-1. **Sidebar Context (`<aside class="filter-rail">`):** A `.resource-card` is placed in `.sidebar-card-slot` (~250px wide). Because its container is below 480px, it automatically renders as a compact, vertically stacked reference card.
-2. **Main Catalog Context (`<main class="catalog-workspace">`):** The exact same `.resource-card` component is placed in the featured 2-column grid slot (> 500px wide). Because its container exceeds 480px, it automatically renders as an expansive horizontal card.
+@keyframes scale-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+```
 
-Both cards share identical HTML markup and classes without custom layout overrides.
+### Option B: Scroll-Reveal Elements
+
+Catalog cards (`.catalog-item`), the sidebar spotlight card, and section headings smoothly fade in and slide upward as they cross into the viewport:
+
+```css
+@keyframes reveal-card {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .catalog-item {
+    animation: reveal-card auto linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 35%;
+  }
+
+  .sidebar-spotlight {
+    animation: reveal-card auto linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 30%;
+  }
+}
+```
+
+## 4. Accessibility & Reduced-Motion (`prefers-reduced-motion`)
+
+To protect users with vestibular disorders or motion sensitivities, all animations and transitions are comprehensively disabled when reduced-motion is requested at the OS level:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    transform: none !important;
+  }
+
+  .scroll-progress-bar {
+    display: none !important;
+  }
+}
+```
 
 ## AI Tool and Prompts
 
 **AI tool:** ChatGPT
 
-### Prompt 1: Writing Container Queries
+### Prompt 1: Designing High-Performance Hover States
 
-> I have a reusable card element called `.resource-card` containing an image and some text. I want to convert this card's styling to use CSS Container Queries instead of Media Queries. If its parent element is wider than 450px, the card should display horizontally. If its parent is narrower, it should stack vertically. Can you write the HTML structure and the nested CSS using `@container`?
+> I have a card component called `.resource-card`. I want to design a subtle micro-interaction when a user hovers or tabs onto it. The card should scale up very slightly (1.012x), lift upward, and drop a clean shadow. Show me how to write this transition using only CSS transforms and opacity so that it is hardware-accelerated. Also, include an accessible `:focus-visible` ring.
 
-### Prompt 2: Refactoring Layouts for Container Queries
+### Prompt 2: Building CSS Scroll-Driven View Animations
 
-> In my project, I have cards in my main asymmetric grid and cards in my sidebar aside. They currently look messy because the sidebar cards are being squished. Can you help me set `container-type: inline-size` on the parent elements of these card slots and show me how to refactor the cards to self-adjust perfectly?
+> I want to create a scroll-reveal animation for my layout cards using native modern CSS scroll-driven animations. As each card enters the viewport, it should fade from opacity 0 to 1 and slide up by 25px. Can you write the CSS using `animation-timeline: view()` and explain how the view-timeline bounds are determined?
 
 ## Human Audit
 
-### DevTools Container Query Inspector
+### DevTools Rendering & Paint Flashing
 
-1. Open DevTools in Chrome, Edge, Firefox, or Safari.
-2. Inspect `.catalog-item` and `.sidebar-card-slot` to verify active `container` badges.
-3. Inspect `.resource-card` and verify `@container (min-width: 480px)` rules in the Styles panel.
-4. Resize the browser window; confirm that cards smoothly switch layout states based on parent track dimensions.
+1. Open Chrome DevTools > More tools > **Rendering**.
+2. Check **Paint flashing**.
+3. Hover and focus on `.resource-card`, buttons, and links.
+4. Confirmed: Only local composited layers repaint; zero full-page layout thrashing or layout shifts occur.
 
-### Multi-Context Comparison
+### Reduced-Motion Verification
 
-- Inspect the sidebar card: confirmed vertically stacked layout.
-- Inspect the main catalog hero card: confirmed horizontal side-by-side layout.
-- No horizontal overflow or clipping occurs across 320px, 375px, 768px, 1024px, 1440px, and 2560px viewports.
+- Turned on OS-level "Reduce Motion".
+- Refreshed the page: all animations and transitions instantly disabled, progress bar hidden, and layout remained 100% accessible and static.
 
 ## Testing and Video
 
-- Week 06 container audit: [`week06/CONTAINER-AUDIT.txt`](week06/CONTAINER-AUDIT.txt)
-- Week 06 architecture audit: [`week06/ARCHITECTURE-AUDIT.txt`](week06/ARCHITECTURE-AUDIT.txt)
-- Week 06 checklist: [`week06/TESTING-CHECKLIST.md`](week06/TESTING-CHECKLIST.md)
-- Week 06 video script: [`week06/VIDEO-SCRIPT.md`](week06/VIDEO-SCRIPT.md)
+- Week 07 interaction audit: [`week07/INTERACTION-AUDIT.txt`](week07/INTERACTION-AUDIT.txt)
+- Week 07 architecture audit: [`week07/ARCHITECTURE-AUDIT.txt`](week07/ARCHITECTURE-AUDIT.txt)
+- Week 07 checklist: [`week07/TESTING-CHECKLIST.md`](week07/TESTING-CHECKLIST.md)
+- Week 07 video script: [`week07/VIDEO-SCRIPT.md`](week07/VIDEO-SCRIPT.md)
 
 ## Deployment
 
@@ -284,6 +357,7 @@ Opening all milestone URLs in an Incognito/Private window verifies the public ar
 - Week 04: `/week04/`
 - Week 05: `/week05/`
 - Week 06: `/week06/`
+- Week 07: `/week07/`
 
 ## Author
 
