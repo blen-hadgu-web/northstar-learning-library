@@ -1,30 +1,18 @@
 # Northstar Learning Library
 
-Northstar Learning Library is a progressive capstone project by **Blen Hadgu**. It uses **Archetype C: The Curation & Discovery Portal** to build an accessible interface for finding, filtering, comparing, and saving technology-learning resources.
+Northstar Learning Library is a progressive capstone project by **Blen Hadgu**. It uses **Archetype C: The Curation & Discovery Portal** to create an accessible interface for finding, filtering, comparing, and saving technology-learning resources.
 
 ## Live Milestones
 
 - Project landing page: `https://blen-hadgu-web.github.io/northstar-learning-library/`
 - Week 02 design tokens: `https://blen-hadgu-web.github.io/northstar-learning-library/week02/`
 - Week 03 structural frame: `https://blen-hadgu-web.github.io/northstar-learning-library/week03/`
-- Week 04 asymmetric grid hub: `https://blen-hadgu-web.github.io/northstar-learning-library/week04/`
+- Week 04 asymmetric grid: `https://blen-hadgu-web.github.io/northstar-learning-library/week04/`
+- Week 05 CSS architecture: `https://blen-hadgu-web.github.io/northstar-learning-library/week05/`
 
 ## Public Repository
 
 `https://github.com/blen-hadgu-web/northstar-learning-library`
-
-## Selected Archetype
-
-**Archetype C: The Curation & Discovery Portal**
-
-The application includes:
-
-- A persistent global header and semantic navigation
-- A responsive filter sidebar
-- An asymmetric resource-card catalog
-- A featured learning path
-- Supporting guides, courses, and toolkits
-- Future comparison and saved-resource tools
 
 ## Project Structure
 
@@ -39,7 +27,19 @@ northstar-learning-library/
 │   ├── index.html
 │   ├── styles.css
 │   ├── TESTING-CHECKLIST.md
-└── week04/
+│   └── VIDEO-SCRIPT.md
+├── week04/
+│   ├── assets/
+│   │   ├── accessible-web.svg
+│   │   ├── algorithms.svg
+│   │   ├── css-layout.svg
+│   │   ├── git-workflow.svg
+│   │   ├── javascript.svg
+│   │   └── ux-research.svg
+│   ├── index.html
+│   ├── styles.css
+│   ├── TESTING-CHECKLIST.md
+└── week05/
     ├── assets/
     │   ├── accessible-web.svg
     │   ├── algorithms.svg
@@ -49,204 +49,211 @@ northstar-learning-library/
     │   └── ux-research.svg
     ├── index.html
     ├── styles.css
+    ├── ARCHITECTURE-AUDIT.txt
     ├── TESTING-CHECKLIST.md
 ```
 
-Every milestone remains at its original URL. Week 04 duplicates the Week 03 foundation into a new folder before adding the resource grid.
+Week 05 duplicates the Week 04 page and assets into a new directory. The Week 05 HTML is byte-for-byte identical to Week 04; only the copied stylesheet is architecturally refactored.
 
 ## Run Locally
 
-No framework, JavaScript, package manager, or build process is required.
+No package manager, CSS preprocessor, JavaScript framework, or build command is required.
 
 1. Download or clone the repository.
 2. Open the root `index.html`.
-3. Use the milestone navigation to open Week 02, Week 03, or Week 04.
+3. Use the milestone links to open Week 04 and Week 05 for comparison.
 
 VS Code Live Server may also be used.
 
-# Week 02: Global Token Blueprint
+# Week 05: Native Nesting & `@layer` Architecture
 
-Week 02 established:
+## Visual-continuity goal
 
-- Light and dark OKLCH color variables
-- WCAG-aware foreground and background pairs
-- Fluid typography with `clamp()`
-- Relative spacing constants
-- Reusable surfaces, borders, focus, radius, and shadow tokens
-- Cascade layers
+The Week 05 page intentionally preserves the Week 04 content and visual hierarchy:
 
-Shared variables reused by Week 04 include:
+- Same semantic HTML
+- Same local SVG assets
+- Same header and filter rail
+- Same asymmetric six-card grid
+- Same colors, spacing, shadows, and breakpoints
+
+The change is architectural rather than visual. An automated Chromium comparison found zero changed pixels at 1440×900, 1024×900, 768×1024, and 375×812.
+
+## Layer precedence
+
+The first statement in `week05/styles.css` is:
 
 ```css
---color-primary
---color-secondary
---color-background
---color-surface
---color-surface-raised
---color-text
---color-text-muted
---color-border
---color-focus
-
---space-xs
---space-sm
---space-md
---space-lg
---space-xl
+@layer reset, base, layout, components;
 ```
 
-# Week 03: Structural Frames & Semantic Navigation
+The responsibilities are:
 
-Week 03 established:
+### `reset`
 
-- Persistent header
-- Semantic navigation
-- Left filter `aside`
-- Flexible catalog `main`
+Structural browser-default cleanup:
+
+- Universal `box-sizing`
+- Default margin removal
+- List padding reset
+- Responsive image defaults
+- Form-control font inheritance
+
+### `base`
+
+Global design and element defaults:
+
+- Week 02 custom properties
+- Light and dark OKLCH tokens
+- Body typography and background
+- Heading, paragraph, link, code, and focus defaults
+
+### `layout`
+
+High-level frames inherited from Week 03:
+
+- Full dynamic-viewport portal shell
+- Global header grid
+- Filter sidebar
+- Main catalog workspace
 - Footer
-- Full dynamic-viewport frame
-- Responsive stacking
-- `minmax()` protection for the sidebar and main track
+- Responsive frame rearrangement
 
-# Week 04: The Asymmetric Responsive Grid Hub
+### `components`
 
-Week 04 populates the main catalog with six resource cards.
+Specific interface pieces:
 
-## Content hierarchy
+- Navigation links
+- Filter controls
+- Asymmetric grid
+- Resource cards
+- Hero modifier
+- Badges
+- Metadata
+- Card links
+- Grid note
+- Accessibility utility
 
-The first card is the featured learning path:
+Because `components` is declared later than `base`, component rules win by layer precedence before selector specificity needs to be increased.
 
-**Accessible Web Foundations**
+## Native CSS nesting
 
-It spans two columns and two rows on wide screens. Five supporting cards remain one track each:
+Week 05 uses native nesting directly inside the `.css` file.
 
-1. Git & GitHub Workflow
-2. CSS Layout Systems
-3. Inclusive UX Research
-4. JavaScript Essentials
-5. Data Structures & Algorithms
-
-## Grid formula
+Example:
 
 ```css
-.catalog-grid {
+.resource-card {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-flow: dense;
-  grid-auto-rows: minmax(12rem, auto);
-  gap: var(--space-md);
+
+  &.resource-card--hero {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+
+    .resource-card__content {
+      align-content: center;
+    }
+  }
+
+  .resource-card__link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 0.22rem solid var(--color-focus);
+    }
+  }
 }
-
-.catalog-item--hero {
-  grid-column: span 2;
-  grid-row: span 2;
-}
 ```
 
-### Why `minmax(0, 1fr)` matters
+Other nested component roots include:
 
-A fractional track has an automatic minimum based on its contents unless that minimum is explicitly reduced. `minmax(0, 1fr)` permits the track to shrink below long min-content widths, reducing overflow risk.
+- `.portal-header`
+- `.filter-form`
+- `.catalog-grid`
+- `.resource-card`
+- `.grid-notes`
 
-### Why dense placement is used
+## Parent selector usage
 
-```css
-grid-auto-flow: dense;
-```
+The stylesheet uses `&` for:
 
-When the number of columns changes, a spanning item may create an earlier available grid position. Dense placement allows a later supporting card to fill that position instead of leaving a large internal hole.
+- `&:hover`
+- `&:focus`
+- `&:focus-visible`
+- `&[aria-current="page"]`
+- `&.catalog-item--hero`
+- `&.resource-card--hero`
 
-Dense placement affects visual placement only. The semantic and keyboard reading order remains the HTML source order.
+It does not use Sass-only selector concatenation such as `&--hero`.
 
-## Responsive behavior
+## No preprocessor
 
-Wide screens:
+The project requires:
 
-```css
-grid-template-columns: repeat(3, minmax(0, 1fr));
-```
+- No Sass
+- No PostCSS compilation
+- No npm command
+- No generated CSS
+- No source map
 
-Tablet screens:
-
-```css
-grid-template-columns: repeat(2, minmax(0, 1fr));
-```
-
-The hero spans both tablet columns but no longer spans two rows.
-
-Mobile screens:
-
-```css
-grid-template-columns: minmax(0, 1fr);
-```
-
-The hero returns to a normal single-column card.
-
-## Unified tokens
-
-The grid and cards reuse the Week 02 system:
-
-```css
-gap: var(--space-md);
-padding: var(--space-md);
-background: var(--color-surface);
-border-color: var(--color-border);
-color: var(--color-text-muted);
-```
-
-No hardcoded pixel gaps or padding values were introduced.
+The browser reads `week05/styles.css` directly.
 
 ## AI Tool and Prompts
 
 **AI tool:** ChatGPT
 
-### Prompt 1: Designing an asymmetric grid
+### Prompt 1: Refactoring CSS to cascade layers
 
-> I have a main content area containing six resource cards for an Archetype C curation portal. I want to build a CSS Grid that is asymmetric. On desktop, create a three-column layout where the first card is a hero card that spans two columns and two rows, while the other five cards each occupy one track. Write the CSS using fractional units and `minmax(0, 1fr)`. Use my existing Week 02 spacing and OKLCH theme variables for grid gaps, card padding, surfaces, borders, text, and accents. Scale to two columns on tablet and one column on mobile without text overlap or horizontal overflow.
+> Here is my Week 04 stylesheet [paste CSS]. Modernize it by sorting the rules into exactly four cascade layers declared in this order: `reset`, `base`, `layout`, and `components`. Preserve the existing visual output. Put browser-default cleanup in reset, design tokens and element defaults in base, global header/sidebar/main/footer frames in layout, and navigation, forms, grids, cards, badges, and widgets in components. Keep responsive rules inside the layer that owns the affected rules. Explain why each group belongs in its layer.
 
-### Prompt 2: Preventing grid gaps
+### Prompt 2: Refactoring to native nesting
 
-> My asymmetric resource grid leaves an empty position when the viewport changes from three columns to two. Analyze the supplied HTML and CSS. Preserve the featured-card hierarchy, add `grid-auto-flow: dense`, ensure child cards use `min-inline-size: 0`, and revise the hero span at tablet and mobile sizes so large internal gaps disappear without changing the semantic source order.
+> Analyze my Week 04 card, navigation, filter, and grid styles [paste component CSS]. Refactor them with native CSS nesting in a normal `.css` file. Nest child selectors beneath `.portal-header`, `.filter-form`, `.catalog-grid`, `.resource-card`, and `.grid-notes`. Use the parent selector for pseudo-classes and modifiers, including `&:hover`, `&:focus-visible`, `&[aria-current="page"]`, and `&.resource-card--hero`. Do not use Sass-only `&--modifier` syntax, and do not require a build process. Preserve the Week 04 visual output.
 
 ## Human Audit
 
-### Grid Inspector
+### Visual continuity
 
-Inspect `.catalog-grid` in DevTools and enable the Grid overlay. Verify that the three `fr` tracks stretch proportionally and that the hero occupies two tracks in both grid directions.
+Compare Week 04 and Week 05 at identical viewport sizes. The HTML and assets are identical, and the refactored declarations retain the same values for the live interface.
 
-### No-overlap test
+### Inspector layer audit
 
-Test the page at:
+In DevTools:
 
-- 320px
-- 375px
-- 768px
-- 1024px
-- 1440px
-- 2560px
+1. Inspect `.resource-card__badge` and find the `components` layer.
+2. Inspect `.catalog-workspace` and find the `layout` layer.
+3. Inspect an `h3` and find the `base` layer.
+4. Confirm that the browser displays nested rules rather than ignoring them.
 
-Confirm that headings, metadata, images, and links remain inside their card boundaries.
+### Native-syntax check
 
-### Spacing consistency
+Verify:
 
-The grid gap and card content padding are both powered by existing spacing variables. Week 04 adds no pixel-based gap or padding declaration.
+- The file is `styles.css`
+- Nested rules appear in DevTools
+- Hover and focus states work
+- Hero modifier rules apply
+- No `.scss` file exists
 
 ## Testing and Video
 
-- Week 04 checklist: [`week04/TESTING-CHECKLIST.md`](week04/TESTING-CHECKLIST.md)
-- Week 04 video script: [`week04/VIDEO-SCRIPT.md`](week04/VIDEO-SCRIPT.md)
+- Week 05 architecture audit: [`week05/ARCHITECTURE-AUDIT.txt`](week05/ARCHITECTURE-AUDIT.txt)
+- Week 05 checklist: [`week05/TESTING-CHECKLIST.md`](week05/TESTING-CHECKLIST.md)
+- Week 05 video script: [`week05/VIDEO-SCRIPT.md`](week05/VIDEO-SCRIPT.md)
 
-The separate “Web Project Testing & Quality Assurance Guide” was not included in the supplied assignment text. The prepared checklist covers every visible requirement plus common semantic, keyboard, responsive, zoom, and deployment tests.
+The separate “Web Project Testing & Quality Assurance Guide” was not included in the supplied assignment text. The prepared checklist covers archive preservation, visual continuity, layer inspection, nesting syntax, responsive behavior, keyboard access, zoom, and deployment.
 
 ## Deployment
 
-GitHub Pages should remain configured as:
+GitHub Pages remains configured as:
 
 ```text
 Branch: main
 Folder: /(root)
 ```
-
-Opening all milestone URLs in an Incognito/Private window verifies the public archive.
 
 ## Author
 
