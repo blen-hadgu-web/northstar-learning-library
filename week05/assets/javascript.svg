@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title">
+  <title id="title">JavaScript interactive controls</title>
+  <rect width="640" height="420" fill="oklch(91% 0.08 95)"/>
+  <rect x="70" y="60" width="500" height="300" rx="30" fill="oklch(23% 0.035 255)"/>
+  <rect x="105" y="105" width="210" height="32" rx="16" fill="oklch(82% 0.17 75)"/>
+  <rect x="105" y="165" width="330" height="24" rx="12" fill="oklch(72% 0.14 255)"/>
+  <rect x="105" y="215" width="270" height="24" rx="12" fill="oklch(76% 0.12 170)"/>
+  <rect x="105" y="265" width="360" height="24" rx="12" fill="oklch(72% 0.1 300)"/>
+  <circle cx="500" cy="250" r="42" fill="oklch(82% 0.17 75)"/>
+  <path d="M486 250l12 12 24-29" fill="none" stroke="oklch(23% 0.035 255)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

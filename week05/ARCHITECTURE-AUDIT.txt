@@ -1,0 +1,36 @@
+Week 05 Architecture Audit
+Northstar Learning Library
+
+Archive preservation
+- Week 05 HTML identical to Week 04: True
+- Week 05 uses a separate directory: True
+- Week 04 assets copied into Week 05: True
+
+Cascade layers
+- Exact first declaration: True
+- Layer blocks found: reset, base, layout, components
+- Exactly four required layer blocks: True
+- Normal component rules using !important: 0
+
+Native nesting
+- Nested resource card rules: True
+- Nested filter form rules: True
+- Nested portal header rules: True
+- Nested catalog grid rules: True
+- Parent &:hover count: 2
+- Parent &:focus-visible count: 5
+- Parent attribute selector present: True
+- Valid hero modifier selector present: True
+- Sass-only &--modifier count: 0
+- SCSS files present: 0
+
+Automated visual continuity
+The Week 04 and Week 05 pages were rendered with the same HTML, assets,
+light color scheme, and viewport sizes. Pixel differences were:
+
+- 1440 × 900: 0 changed pixels
+- 1024 × 900: 0 changed pixels
+- 768 × 1024: 0 changed pixels
+- 375 × 812: 0 changed pixels
+
+Result: the CSS architecture changed while the tested visual output remained identical.
