@@ -1,0 +1,20 @@
+Week 06 Architecture & Container Query Audit
+Northstar Learning Library
+
+Archive preservation
+- Week 02–05 historical integrity maintained: True
+- Week 06 created in separate progressive directory: True
+- Week 06 SVG assets copied into week06/assets/: True
+
+Layer and Component Architecture
+- Cascade layers defined: reset, base, layout, components
+- Container contexts declared in @layer components: True (.catalog-item, .sidebar-card-slot)
+- Container type utilized: inline-size
+- Component queries defined: @container (min-width: 480px) and @container (min-width: 720px)
+- Relative container units used: cqi (container query inline size)
+- Viewport @media queries for card internal structure: 0 (completely removed)
+
+Placement Test Status
+- Sidebar narrow container: Card automatically displays vertical stack layout.
+- Main catalog wide container: Card automatically displays horizontal side-by-side layout.
+- Single component CSS definition handles both seamlessly without page-level media query overrides.
