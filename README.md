@@ -334,12 +334,11 @@ To protect users with vestibular disorders or motion sensitivities, all animatio
 - Turned on OS-level "Reduce Motion".
 - Refreshed the page: all animations and transitions instantly disabled, progress bar hidden, and layout remained 100% accessible and static.
 
-## Testing and Video
+## Testing
 
 - Week 07 interaction audit: [`week07/INTERACTION-AUDIT.txt`](week07/INTERACTION-AUDIT.txt)
 - Week 07 architecture audit: [`week07/ARCHITECTURE-AUDIT.txt`](week07/ARCHITECTURE-AUDIT.txt)
 - Week 07 checklist: [`week07/TESTING-CHECKLIST.md`](week07/TESTING-CHECKLIST.md)
-- Week 07 video script: [`week07/VIDEO-SCRIPT.md`](week07/VIDEO-SCRIPT.md)
 
 ## Deployment
 
